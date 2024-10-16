@@ -1,0 +1,138 @@
+.container {
+    display: flex;
+    width: 100vw;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.prompt-container {
+    display: grid;
+    grid-template-columns: 1.2fr 4fr 0.8fr;
+    height: auto;
+    width: min(88vw,88vh);
+    grid-gap: min(2vw,2vh);
+}
+.calculator {
+    margin-top:min(1vw,1vh);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* grid-column: 4; */
+    width: min(66vw,66vh);
+    height: auto;
+    grid-gap: min(2vw,2vh);
+}
+.last-row {
+    margin-top: min(3vw,3vh);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    /* grid-column: 4; */
+    width: min(66vw,66vh);
+    height: auto;
+    grid-gap: min(2vw,2vh);
+}
+.btn {
+    /* background-color: #0059ff;
+    border: grey 3px solid;
+    margin: 20px, 20px, 20px;
+    color: rgb(255, 255, 255);
+    padding: 20px 20px; 
+    text-align: center;
+    width: 100%;
+    height: 100%; */
+    background-color: #4CAF50; /* 主色调 */
+    color: white; /* 文字颜色 */
+    border: white 0.1vw solid;
+    /* margin: 5vw, 5vw, 5vw; */
+    border-radius: 1vw; /* 圆角 */
+    padding: 2vw, 2vw;
+    font-size: min(5vw,5vh);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影 */
+    outline: min(1vw,1vh); /* 移除焦点时的轮廓线 */
+    height: min(14vw,14vh);
+}
+.delete-btn {
+    /* background-color: #0059ff;
+    border: grey 3px solid;
+    margin: 20px, 20px, 20px;
+    color: rgb(255, 255, 255);
+    padding: 20px 20px; 
+    text-align: center;
+    width: 100%;
+    height: 100%; */
+    background-color: #c70e0ec6; /* 主色调 */
+    color: rgb(255, 255, 255); /* 文字颜色 */
+    border: white 0.1vw solid;
+    /* margin: 5vw, 5vw, 5vw; */
+    border-radius: 1vw; /* 圆角 */
+    padding: 2vw, 2vw;
+    font-size: min(5vw,5vh);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影 */
+    outline: min(1vw,1vh); /* 移除焦点时的轮廓线 */
+    height: min(14vw,14vh);
+}
+.delete-btn:hover {
+    background-color: #ff0000d8; /* 鼠标悬停时的颜色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
+}
+.delete-btn:active {
+    transform: translateY(min(0.8vw,0.8vh)); /* 按下效果 */
+}
+.btn:hover {
+    background-color: #3e8e41; /* 鼠标悬停时的颜色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
+}
+.btn:active {
+    transform: translateY(min(0.8vw,0.8vh)); /* 按下效果 */
+}
+
+.pushed-down {
+    background-color: #4CAF50; /* 主色调 */
+    color: white; /* 文字颜色 */
+    border: white 0.1vw solid;
+    /* margin: 5vw, 5vw, 5vw; */
+    border-radius: 1vw; /* 圆角 */
+    padding: 2vw, 2vw;
+    font-size: min(5vw,5vh);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影 */
+    outline: min(1vw,1vh); /* 移除焦点时的轮廓线 */
+    height: min(14vw,14vh);
+    background-color: #3e8e41; /* 鼠标悬停时的颜色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 更深的阴影 */
+    transform: translateY(min(0.8vw,0.8vh)); /* 按下效果 */
+}
+.current-operation {
+    background-color: #b3c85ef4; /* 主色调 */
+    color: white; /* 文字颜色 */
+    border: white 0.1vw solid;
+    /* margin: 5vw, 5vw, 5vw; */
+    border-radius: 1vw; /* 圆角 */
+    padding: min(2vw,2vh) min(2vw,2vh);
+    font-size: min(5vw,5vh);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影 */
+    outline: min(1vw,1vh); /* 移除焦点时的轮廓线 */
+    height: min(14vw,14vh);
+}
+
+.ans {
+    background-color: #58997e; /* 主色调 */
+    color: white; /* 文字颜色 */
+    border: white 0.1vw solid;
+    /* margin: 5vw, 5vw, 5vw; */
+    border-radius: 1vw; /* 圆角 */
+    padding: 2vw, 2vw;
+    font-size: min(5vw,5vh);
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影 */
+    outline: min(1vw,1vh); /* 移除焦点时的轮廓线 */
+    height: min(14vw,14vh);
+}
