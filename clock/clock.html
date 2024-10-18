@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .clock {
+            position: relative;
+            width: min(66vw,66vh);
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            height:min(66vw,66vh);
+            border: 1vh solid #000000;
+            border-radius: 50%;
+            background-color: #ffffff36;
+        }
+        .hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transform-origin: 0% 50%; /* 设置旋转点在指针底部 */
+            transition: all 0.05s;
+            background-color: #333;
+            z-index: 1;
+        }
+        .hour-hand {
+            width: min(12.3vw,12.3vh); /* 37.5% of clock radius */
+            height: min(1.3vw,1.3vh);
+        }
+        .minute-hand {
+            width: min(20vw,20vh); /* 25% of clock radius */
+            height: min(0.8vw,0.8vh);
+        }
+        .second-hand {
+            width: min(32vw,32vh); /* 50% of clock radius */
+            height: min(0.5vw,0.5vh);
+            background-color: red;
+        }
+        /* Add a central point for reference */
+        .center-point {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(3vw,3vh);
+            height: min(3vw,3vh);
+            background-color: #333;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        #timeDisplay {
+            font-size: 2em;
+            color: #333;
+        }
+        .clock-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            width:100vw;
+            height: 100vh;
+            background-color: #ffffffd7;
+        }
+    </style>
+</head>
+
+<body class = "clock-body", id="bg">
+    <div id="timeDisplay"></div>
+
+    <div class="clock">
+        <div class="center-point"></div> 
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+    </div>
+
+    <script>
+        function displayTime() {
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+
+            // Add leading zeros if necessary
+            hours = checkTime(hours);
+            minutes = checkTime(minutes);
+            seconds = checkTime(seconds);
+
+            var timeString = hours + ":" + minutes + ":" + seconds;
+            document.getElementById('timeDisplay').innerHTML = timeString;
+        }
+
+        function checkTime(i) {
+            if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+            return i;
+        }
+
+        setInterval(displayTime, 1000);
+        function updateClock_second() {
+            var now = new Date();
+            var seconds = now.getSeconds();
+            var milliSeconds = now.getMilliseconds();
+            
+            // Calculate the angle for each hand
+            var secondAngle = seconds * 6 + milliSeconds * 0.006 - 90; // 360 degrees / 60 seconds
+            if(Math.abs(secondAngle) - 0 < 0.2) {
+                return;
+            }
+            document.querySelector('.second-hand').style.transform = `rotate(${secondAngle}deg)`;
+        }
+        function updateClock_MinAndHr() {
+            var now = new Date();
+            var minutes = now.getMinutes();
+            var hours = now.getHours();
+            var seconds = now.getSeconds();
+            // Normalize hours to be between 0 and 11
+            hours %= 12;
+
+            // Calculate the angle for each hand
+            var minuteAngle = (minutes + seconds / 60) * 6 - 90; // Adjust for partial minutes
+            var hourAngle = (hours + minutes / 60) * 30 - 90; // Adjust for partial hours
+
+            // Apply the angles to the hands
+            if(Math.abs(minuteAngle) - 0 < 0.1) {
+                return;
+            }
+            if(Math.abs(hourAngle) - 0 < 0.1) {
+                return;
+            }
+            document.querySelector('.minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
+            document.querySelector('.hour-hand').style.transform = `rotate(${hourAngle}deg)`;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock_second, 20);
+        setInterval(updateClock_MinAndHr, 2000);
+        // updateClock_second(); // Initial call to set the clock's hands at page load
+        updateClock_MinAndHr(); // Initial call to set the clock's hands at page load
+        displayTime(); // Initial call to set the clock's time at page load
+
+
+        function updateBackgroundColor() {
+        // 获取当前时间
+        var now = new Date();
+        var hour = now.getHours();
+        hour = Math.abs(hour - 12);
+        hour = 12 - hour;
+        hour = hour * 1.5;
+        var minute = now.getMinutes();
+        var second = now.getSeconds();
+
+        // 将时间转换为一天中的比例 [0, 1]
+        var ratioOfDay = ((hour % 24) * 3600 + minute * 60 + second) / 86400;
+
+        // 定义起始颜色和结束颜色
+        var startColor = { r: 12, g: 5, b: 30, a: 0.7 }; // #000000
+        var endColor = { r: 0, g: 155, b: 255, a: 0.7 }; // #006affd7
+
+        // 计算渐变颜色
+        var red = Math.round(startColor.r + ratioOfDay * (endColor.r - startColor.r));
+        var green = Math.round(startColor.g + ratioOfDay * (endColor.g - startColor.g));
+        var blue = Math.round(startColor.b + ratioOfDay * (endColor.b - startColor.b));
+        var alpha = startColor.a + ratioOfDay * (endColor.a - startColor.a);
+
+        // 格式化为CSS颜色字符串
+        var color = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
+
+        // 应用颜色到元素
+        console.log(color);
+        document.getElementById('bg').style.backgroundColor = color;
+    }
+        setInterval(updateBackgroundColor, 10000);
+        updateBackgroundColor(); // Initial call to set the clock's background color at page load
+    </script>
+</body>
+</html>
