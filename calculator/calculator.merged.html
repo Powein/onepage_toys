@@ -92,13 +92,6 @@ handleOp = function(describeOp) {
         document.getElementById('op').innerHTML = displayOp
         return
     }
-    // if (document.getElementById('ans').innerHTML != '' && last_ans != '' 
-    // && document.getElementById('op').innerHTML == '') {
-    //     console.log('case2')
-    //     document.getElementById(describeOp).setAttribute("class", "pushed-down")
-    //     document.getElementById('op').innerHTML = displayOp
-    //     return
-    // }
     if(document.getElementById('ans').innerHTML != '' && document.getElementById('op').innerHTML == '') {
         console.log('case3')
         pushCurrentAns()
@@ -135,6 +128,12 @@ clickButton = function(msg) {
         if(ans.innerHTML == 'Error' || ans.innerHTML == 'Infinity' || ans.innerHTML == '-Infinity' || 
             ans.innerHTML == 'NaN' || ans.innerHTML == '0') {
                 ans.innerHTML = '';
+        }
+        if((ans.innerHTML.indexOf('.') != -1) && msg == '.') {
+            return;
+        }
+        if(ans.innerHTML == '' && msg == '.') {
+            ans.innerHTML = ans.innerHTML + 0
         }
         if(ans.innerHTML.length < 15)
             ans.innerHTML = ans.innerHTML + msg;
@@ -202,7 +201,50 @@ clickButton = function(msg) {
             }
             break;
     }
-}</script>
+}
+desToDisOp = {
+    'add':'+',
+    'sub':'-',
+    'mul':'*',
+    'div':'÷',
+    'mod':'%',
+}
+
+testList = []
+document.addEventListener('keydown', function(event) {
+    // console.log(typeof(event.key))
+    // testList.push(event.key)
+    // console.log(testList)
+    knownKeys = {
+        '+':"add",
+        '-':'sub',
+        '*': 'mul',
+        '%': 'mod',
+        '/': 'div',
+        'c': 'clear',
+        'C': 'clear',
+        '=': 'cal',
+        "Enter" : 'cal',
+        "Backspace": 'bs'
+
+    }
+    console.log(event.key)
+    // console.log(knownKeys[event.key])
+    // knownOps = ["+", "-", "*", "%", "c", "C", "/"]
+    figures = new Set(['0', '1','2','3','4','5','6','7','8','9', '.'])
+    if(figures.has(event.key)) {
+        console.log('KeyBoard figure' + event.key + 'is pressed down')
+        clickButton(event.key)
+    } else if (knownKeys[event.key] != undefined) {
+        if(event.key == 'Backspace') {
+            delAns()
+            return
+        }
+        console.log('KeyBoard opreation' + knownKeys[event.key] + 'is pressed down')
+        clickButton(knownKeys[event.key]);
+    }
+    // clickButton();
+});</script>
 <style>.container {
     display: flex;
     width: 100vw;
