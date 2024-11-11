@@ -1,0 +1,181 @@
+.mainBox{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    color: black;
+    background-color: aliceblue;
+    flex-direction: column;
+}
+
+.addressBox {
+    width: 100%;
+    height: 10%;
+    /* background-color: brown; */
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: center;
+    align-items: center;
+}
+
+.mainFunctionBox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 90%;
+    /* background-color: chartreuse; */
+}
+
+.selectGraphBox {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    /* background-color: rgb(127, 168, 255); */
+    justify-content: center;
+    align-items: center;
+}
+
+.selectGraphByTime {
+    /* background-color: blanchedalmond; */
+    height: 30%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selectGraphByAeras {
+    /* background-color: blue; */
+    height: 50%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.graphIndexCotroller {
+    /* background-color: blueviolet; */
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+.graphContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-y:scroll;
+    overflow-x: scroll;
+    /* background-color: rgb(255, 230, 4); */
+}
+
+.graph {
+    height: 100%;
+    width: height;
+    user-select: none; /* 防止文本选择 */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    /* pointer-events: none; */
+}
+
+
+.dateSelector {
+    width: 100%;
+    height: 30%;
+    margin-top: 0.3vw;
+}
+
+.button {
+    justify-content: center;
+    width: 12.5vw;
+    height: 3vw;
+    margin: 1vw;
+    background-color: rgb(60, 155, 238);
+    border-radius: 10px;
+    border:0;
+    font-size: larger;
+
+
+}
+
+.button:active {
+    background-color: rgb(122, 187, 245);
+    transform: translateY(0.1vw);
+}
+
+.button:hover {
+    background-color: rgb(122, 187, 245);
+    border:rgb(251, 251, 251);
+    cursor: pointer;
+}
+
+.regionSelectForm {
+    margin-bottom: 20px;
+}
+.regionSelectForm label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.cregionSelectForm input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.5); /* 放大复选框 */
+}
+.regionSelectForm input[type="checkbox"]:checked + span::before {
+    content: "✓";
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    color: green;
+}
+.loadGraphButton {
+    height: auto;
+    width: auto;
+}
+
+#addressInput{
+    height: 60%;
+    width: 60%;
+    margin: 1vw;
+}
+
+.labels {
+    margin: 1vw;
+    font-size: large;
+}
+
+/* input[type="file"] {
+    display: none;
+} */
+
+.custom-file-input {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-file-input:hover {
+    background-color: #ffffff00;
+}
+
+progress {
+    width: 100%;
+    height: 20px;
+    color: chartreuse;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+}
+

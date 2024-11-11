@@ -1,0 +1,72 @@
+<title>GraphViewer</title>
+<head>
+    <script src=""> </script>
+    <script src=""> </script>
+    <script src=""> </script>
+    <link  rel="stylesheet" href="./graphViewer.css"/>
+    <script src="./graphViewer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> -->
+</head>
+<body onload="init()">
+    <div class="mainBox">
+        <div class="addressBox">
+        <!-- 输入地址栏 -->
+            <div class="labels">选择本地图片以加载</div>
+
+            <input type="file" id="fileInput" multiple class="custom-file-input" onchange="handleFileSelect(event)" name="*.png *.jpg" accept="image/png, image/jpeg"> </input>
+            <!-- <pre id="fileContent" class="labels"></pre> -->
+
+            <!-- <input id="addressInput">
+
+            </input> -->
+            <!-- <button id="loadGraphButton" class="button" onclick="loadGraphs()">
+                加载图片信息
+            </button> -->
+        <div class="labels" id="progressLabel">未加载文件</div>
+        </div>
+
+        <progress id="progressBar" value="0" max="100"></progress>
+        <div class="mainFunctionBox">
+        <!-- 其他功能栏 -->
+            <div class="selectGraphBox">
+                <!-- 左侧复选栏目 -->
+                <div class="selectGraphByTime">
+                    <!-- 按时间选择 -->
+                    <form id="dateRangeForm">
+                        <label class="labels" for="startDate">开始日期:</label>
+                        <input class="dateSelector" type="date" id="startDate" name="startDate" required>
+                        <br/>
+                        <label class="labels" for="endDate">结束日期:</label>
+                        <input  class="dateSelector" type="date" id="endDate" name="endDate" required>
+                    </br>
+                        
+                    </form>
+                    
+                </div>
+                <div class="selectGraphByAeras">
+                    <form id="regionSelectForm">
+                        <hr/>
+                    </form>
+                    
+                </div>
+                <div class="options">
+                <button class="button" type="submit" id="selectByAeraBtn" onclick="readCheckboxValues()">按选中区域筛选</button>
+                <button class="button" onclick="readSelectDates()">按日期筛选</button>
+                <button class="button"  onclick="debug_load_image()">全部加载</button>
+                </div>
+                <div class="graphIndexCotroller">
+                    <!-- 增减当前显示图片索引 -->
+                    <button class="Button" onclick="previousImage()">前一张</button>
+                    <div class="labels" id="currentImageIndex">0/0</div>
+                    <button class="Button" onclick="nextImage()">后一张</button>
+                </div>
+            </div>
+            <div class="graphContainer" id="graphContainer">
+                <!-- 图片展示区 -->
+                <img src = "testimg.jpg" class="graph" id="currentShowing"></img>
+            </div>
+        </div>
+    </div>
+</body>
