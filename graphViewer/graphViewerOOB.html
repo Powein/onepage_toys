@@ -5,6 +5,11 @@
     <script src=""> </script>
     <link  rel="stylesheet" href="./graphViewer.css"/>
     <script >
+        setInterval(() => {
+            if(window.ak == ""){
+                window.ak = prompt("输入你的百度地图服务验证密钥:")
+            }
+        }, 1000);
         function addCheckboxes(items) {
           const container = document.getElementById('regionSelectForm');
           while (container.firstChild) {
@@ -34,6 +39,7 @@
         
         function init() {
           // addCheckboxes(fruits);
+          window.ak = ""
           window.lookUpTable = {nodata : "非拍摄照片"};
           window.lookUpSet = new Set();
           window.globalImageContext = []
@@ -282,7 +288,7 @@
           progressBar.value = value;
           progressLabel.textContent = textx;
         }
-        ak = "QXEefnfZlZA5iTlpr1VNfiQy7FDNzBKP"
+        
         function parseGPS(latitude, longitude) {
           console.log("parsing")
           var url = `https://api.map.baidu.com/reverse_geocoding/v3/?ak=${ak}&output=json&coordtype=wgs84ll&location=${latitude},${longitude}`
@@ -342,6 +348,7 @@
         isDragging = false;
         // script.js
         document.addEventListener('DOMContentLoaded', () => {
+
           const image = document.getElementById('currentShowing');
           let scale = 1; // 初始缩放比例
         
