@@ -1,8 +1,4 @@
-setInterval(() => {
-  if(window.ak == ""){
-      window.ak = prompt("输入你的百度地图服务验证密钥:")
-  }
-}, 1000);
+
 function addCheckboxes(items) {
 const container = document.getElementById('regionSelectForm');
 while (container.firstChild) {
@@ -337,10 +333,13 @@ max = Math.floor(max);
 return Math.floor(Math.random() * (max - min + 1)) + min; // 最大值和最小值都包含
 }
 
-
+function getAK() {
+  window.ak = prompt("输入你的百度地图服务验证密钥:")
+}
 isDragging = false;
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
+  getAK()
 
 const image = document.getElementById('currentShowing');
 let scale = 1; // 初始缩放比例
